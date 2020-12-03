@@ -12,7 +12,8 @@ namespace FizzBuzz
             NumberLister nl = new NumberLister();
 
             Console.WriteLine("Hello World!");
-            Console.WriteLine(nl.Counter(cMax : int.MaxValue) );
+
+            Console.WriteLine(nl.Counter(1,200,"5Pop","25Snaggle","50Derp"));
         }
     }
 }
