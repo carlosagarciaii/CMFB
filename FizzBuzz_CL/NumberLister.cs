@@ -12,7 +12,10 @@ namespace FizzBuzz_CL
         private const int Max = 100;
         private int CurrentNumber ;
         private List<string> counterOutput = new List<string>();
-        
+        //private Dictionary<string,string> counterOutput = new Dictionary<string, string>();
+
+        private ColorSelector cs = new ColorSelector();
+
 
         /*
          * This expects the user to input a Min, Max, and MatchList
@@ -26,14 +29,17 @@ namespace FizzBuzz_CL
 
 
             CurrentNumber = 0;
-            Regex numberMatch = new Regex(@"\d+(?=\D)");
-            Regex stringMatch = new Regex(@"(?<=\d+)\D+");
+            Regex numberMatch = new Regex(@"(?<=\b)(\d+)(?=\:\D+\b)");
+            Regex stringMatch = new Regex(@"(?<=\b\d+\:)(\D+)(?<=\b)");
             int pulledInt; // = new int();
             string pulledString; // = new string();
             string add2List;
 
-
-            if (cMax == int.MaxValue)
+            if(cMax > int.MaxValue)
+            {
+                return "The Number Supplied is too large. \nPlease select a smaller number.";
+            }
+            else if (cMax == int.MaxValue)
             {
                 Console.WriteLine("You have given the highest possible INTeger. \nAre you sure you want to continue? \n<Type Y or Yes to Continue>");
                 string continuePrompt = Console.ReadLine();
@@ -63,11 +69,11 @@ namespace FizzBuzz_CL
                         {
                             if (add2List == string.Empty)
                             {
-                                add2List = " -- " + pulledString;
+                                add2List = pulledString;
                             }
                             else
                             {
-                                add2List += " -- " + pulledString;
+                                add2List += pulledString;
                             }
                         }
                     }
@@ -95,16 +101,16 @@ namespace FizzBuzz_CL
                     }
                     else if (CurrentNumber % 5 == 0)
                     {
-                        counterOutput.Add("Buzz");
+                        counterOutput.Add( "Buzz");
 
                     }
                     else if (CurrentNumber == Min)
                     {
-                        counterOutput.Add(cMin.ToString());
+                        counterOutput.Add( cMin.ToString());
                     }
                     else
                     {
-                        counterOutput.Add(CurrentNumber.ToString());
+                        counterOutput.Add( CurrentNumber.ToString());
                     }
                 }
 
@@ -117,7 +123,12 @@ namespace FizzBuzz_CL
 
             foreach (var item in counterOutput)
             {
-                finalOutput += item + "\n";
+                foreach (var pattern in matchList)
+                {
+                    
+                }
+                
+                //finalOutput += item + "\n";
             }
 
             return finalOutput;
